@@ -1,0 +1,8 @@
+[all:vars]
+ansible_ssh_private_key_file='~/.ssh/fad_staging_general'
+aws_region=us-west-2
+block_device=xvdf
+env=staging
+
+[solr]
+fad-staging-solr.lyrtech.org
