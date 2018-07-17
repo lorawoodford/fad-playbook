@@ -1,0 +1,5 @@
+---
+
+- src: https://github.com/geerlingguy/ansible-role-solr
+  name: ansible-role-solr
+  version: 4.2.1

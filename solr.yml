@@ -1,0 +1,20 @@
+---
+
+# ansible-playbook -i inventory/staging/ solr.yml
+
+- hosts: solr
+  gather_facts: false
+  become: yes
+
+  pre_tasks:
+    - name: install python 2.x
+      raw: test -e /usr/bin/python || (apt update && apt install -y python-simplejson)
+      changed_when: false
+
+- hosts: solr
+  gather_facts: false
+  become: yes
+
+  # roles ...
+
+  tasks: []
