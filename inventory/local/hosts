@@ -1,0 +1,8 @@
+[all:vars]
+ansible_port=22
+ansible_user=ubuntu
+env=local
+server_ssh_port={{ ansible_port }}
+
+[solr]
+fad ansible_host=10.11.12.200
