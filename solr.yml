@@ -3,18 +3,24 @@
 # ansible-playbook -i inventory/staging/ solr.yml
 
 - hosts: solr
-  gather_facts: false
+  gather_facts: true
   become: yes
+
+  roles:
+    - ansible-role-solr
 
   pre_tasks:
     - name: install python 2.x
       raw: test -e /usr/bin/python || (apt update && apt install -y python-simplejson)
       changed_when: false
 
-- hosts: solr
-  gather_facts: false
-  become: yes
+    - name: Add Java 8 repository
+      apt_repository: repo='ppa:webupd8team/java'
 
-  # roles ...
+    - name: Agree to oracle license
+      debconf: name=oracle-java8-installer question=shared/accepted-oracle-license-v1-1 vtype=select value=true
+
+    - name: Install Java 8
+      apt: name=oracle-java8-installer force=yes
 
   tasks: []

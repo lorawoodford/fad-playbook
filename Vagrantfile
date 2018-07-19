@@ -7,7 +7,7 @@ INVENTORY = ENV.fetch('FAD_VAGRANT_INVENTORY', 'inventory/local/hosts')
 
 PLAYS = [
   # 'app',
-  'solr',
+  { file: 'solr', restart: {} },
 ].freeze
 
 Vagrant.configure('2') do |config|

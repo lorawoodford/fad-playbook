@@ -8,5 +8,6 @@ ansible-galaxy install -r requirements.yml --force --roles-path=roles/
 ## Local
 
 ```bash
+vagrant plugin install vagrant-disksize
 vagrant up
 ```
