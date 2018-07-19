@@ -7,7 +7,7 @@ INVENTORY = ENV.fetch('FAD_VAGRANT_INVENTORY', 'inventory/local/hosts')
 
 PLAYS = [
   # 'app',
-  { file: 'solr', restart: {} },
+  'solr',
 ].freeze
 
 Vagrant.configure('2') do |config|
@@ -31,11 +31,11 @@ Vagrant.configure('2') do |config|
     end
   end
 
-  config.vm.provision "shell", inline: "sudo apt-get -y install python-minimal swapspace"
+  config.vm.provision "shell", inline: "sudo apt-get -y install python-minimal"
 
   PLAYS.each do |play|
     config.vm.provision :ansible do |ansible|
-      ansible.playbook = "#{play[:file]}.yml"
+      ansible.playbook = "#{play}.yml"
       ansible.inventory_path = INVENTORY
       ansible.limit = 'all'
     end

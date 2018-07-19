@@ -14,13 +14,15 @@
       raw: test -e /usr/bin/python || (apt update && apt install -y python-simplejson)
       changed_when: false
 
-    - name: Add Java 8 repository
-      apt_repository: repo='ppa:webupd8team/java'
-
-    - name: Agree to oracle license
-      debconf: name=oracle-java8-installer question=shared/accepted-oracle-license-v1-1 vtype=select value=true
-
-    - name: Install Java 8
-      apt: name=oracle-java8-installer force=yes
+    - name: install pre-reqs
+      apt:
+        pkg: "{{ item }}"
+        state: present
+        update_cache: yes
+        cache_valid_time: 3600
+      with_items:
+        - openjdk-8-jre-headless
+      tags:
+        - solr
 
   tasks: []
